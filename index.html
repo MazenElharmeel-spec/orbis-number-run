@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    >
+    <meta name="theme-color" content="#010828">
+    <title>Orbis.Nft — Number Run</title>
+    <!-- Google Fonts: Anton for headings & navigation, Condiment for cursive accents -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Condiment&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="src/random.js"></script>
+    <script defer src="src/equations.js"></script>
+    <script defer src="src/renderer.js"></script>
+    <script defer src="src/main.js"></script>
+  </head>
+  <body>
+    <!-- Space Video Background from CloudFront -->
+    <video
+      id="bg-video"
+      class="bg-video"
+      autoplay
+      loop
+      muted
+      playsinline
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_045634_e1c98c76-1265-4f5c-882a-4276f2080894.mp4"
+    ></video>
+
+    <!-- Cosmic vignette and ambient tint for depth -->
+    <div class="space-ambient" aria-hidden="true"></div>
+
+    <!-- Fixed full-screen texture overlay (z-50, mix-blend-mode: lighten, opacity 0.6) -->
+    <div class="texture-overlay" aria-hidden="true"></div>
+
+    <!-- Runner Canvas -->
+    <canvas id="game" aria-label="Orbis Space Number Run game"></canvas>
+
+    <!-- Heads-Up Display -->
+    <div class="hud" aria-hidden="true">
+      <div class="top-bar">
+        <div class="brand liquid-glass">
+          <div class="brand-left">
+            <span class="brand-sub font-condiment">Space Runner</span>
+            <span class="brand-title font-grotesk">ORBIS.NFT</span>
+          </div>
+          <div class="brand-badge">
+            <span class="badge-dot"></span> LIVE
+          </div>
+        </div>
+
+        <div class="stats liquid-glass">
+          <div class="stat">
+            <div class="stat-label">Distance</div>
+            <div class="stat-value font-mono"><em id="distance">0</em><small>m</small></div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Score</div>
+            <div class="stat-value font-mono text-neon" id="score">0</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Best</div>
+            <div class="stat-value font-mono" id="best">0 <small>m</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="hint desktop-hint liquid-glass">
+          <span class="key">←</span>
+          <span class="key">→</span>
+          <span class="hint-text">Steer Orbis</span>
+          <span class="hint-pipe">|</span>
+          <span class="hint-copy">Enter the correct portal gate</span>
+        </div>
+        <div class="hint mobile-hint liquid-glass">
+          <span>Swipe left or right to change lane</span>
+        </div>
+        <div id="level" class="level-pill liquid-glass font-grotesk">GATE 1 · WARM UP</div>
+      </div>
+    </div>
+
+    <!-- Equation Prompt -->
+    <div class="equation-prompt liquid-glass" aria-hidden="true">
+      <div class="equation-tag">
+        <span class="font-condiment accent-cur">Target Equation</span>
+        <span class="equation-hint">Solve to survive</span>
+      </div>
+      <div class="equation-text font-mono" id="question">77 + 33 <b class="text-neon">= ?</b></div>
+    </div>
+
+    <!-- Start / Game Over Overlay Modal -->
+    <div class="overlay" id="overlay">
+      <section class="card liquid-glass">
+        <!-- Pilot Status Card -->
+        <div class="pilot-badge">
+          <img src="orbis-pilot.png" alt="Orbis Astronaut" class="pilot-avatar">
+          <div class="pilot-details">
+            <span class="pilot-role font-condiment">Astronaut Pilot</span>
+            <span class="pilot-name font-grotesk">ORBIS</span>
+          </div>
+          <div class="pilot-callsign font-mono">SIGNAL · OK</div>
+        </div>
+
+        <div class="eyebrow" id="eyebrow">Beyond Earth & Space Boundaries</div>
+        <h1 id="title" class="font-grotesk">
+          RUN THE<br>
+          <span class="font-condiment title-accent">Numbers.</span>
+        </h1>
+        <p id="copy" class="font-mono">
+          Navigate Orbis through the deep cosmos. Solve the centered equation,
+          then guide Orbis into the gate holding the true answer.
+        </p>
+
+        <div class="pace-title font-grotesk">SELECT WARP PACE</div>
+        <div class="pace-picker" role="group" aria-label="Pace selection">
+          <button class="pace-option liquid-glass" type="button" data-seconds="3" aria-pressed="false">
+            <strong>3s</strong>
+            <span>SUPER</span>
+          </button>
+          <button class="pace-option liquid-glass" type="button" data-seconds="5" aria-pressed="false">
+            <strong>5s</strong>
+            <span>HARD</span>
+          </button>
+          <button class="pace-option liquid-glass active" type="button" data-seconds="7" aria-pressed="true">
+            <strong>7s</strong>
+            <span>NORMAL</span>
+          </button>
+          <button class="pace-option liquid-glass" type="button" data-seconds="10" aria-pressed="false">
+            <strong>10s</strong>
+            <span>EASY</span>
+          </button>
+        </div>
+
+        <div class="features">
+          <span class="pill liquid-glass">+ Addition</span>
+          <span class="pill liquid-glass">− Subtraction</span>
+          <span class="pill liquid-glass">× Multiply</span>
+          <span class="pill liquid-glass">÷ Division</span>
+          <span class="pill liquid-glass text-neon">Dynamic Gate Difficulty</span>
+        </div>
+
+        <div class="result font-mono" id="result" hidden></div>
+        
+        <button class="play font-grotesk" id="play" type="button">
+          START MISSION <span aria-hidden="true">↗</span>
+        </button>
+        <span class="fine font-mono">← → or A / D to steer · swipe on touch screens</span>
+      </section>
+    </div>
+  </body>
+</html>
