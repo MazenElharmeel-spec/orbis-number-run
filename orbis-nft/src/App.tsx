@@ -1,8 +1,8 @@
-import Hero from './sections/Hero'
-import About from './sections/About'
-import Collection from './sections/Collection'
-import Cta from './sections/Cta'
-import TextureOverlay from './components/TextureOverlay'
+import Hero from './sections/Hero';
+import About from './sections/About';
+import Collection from './sections/Collection';
+import Cta from './sections/Cta';
+import TextureOverlay from './components/TextureOverlay';
 
 export default function App() {
   return (
@@ -13,5 +13,5 @@ export default function App() {
       <Cta />
       <TextureOverlay />
     </div>
-  )
+  );
 }

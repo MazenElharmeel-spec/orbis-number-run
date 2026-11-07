@@ -2,7 +2,7 @@
   /** Canvas drawing and cosmic space visual effects for Orbis Number Run. */
   function createRenderer(canvas) {
     // alpha: true allows the CloudFront space video behind the canvas to show through seamlessly
-    const context = canvas.getContext("2d", { alpha: true });
+    const context = canvas.getContext('2d', { alpha: true });
     const particles = [];
     const stars = [];
 
@@ -13,7 +13,7 @@
 
     initStars();
     resize();
-    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener('resize', resize, { passive: true });
 
     function initStars() {
       stars.length = 0;
@@ -51,7 +51,7 @@
       context.roundRect(x, y, rectangleWidth, rectangleHeight, radius);
     }
 
-    function burstAtLane(lane, color = "#6FFF00") {
+    function burstAtLane(lane, color = '#6FFF00') {
       const x = lanePosition(lane, 0.82);
       const y = height * 0.79;
 
@@ -69,7 +69,7 @@
           size: 2 + Math.random() * 4,
           life: 0.8,
           maxLife: 0.8,
-          color: isNeon ? color : "#00F0FF",
+          color: isNeon ? color : '#00F0FF',
         });
       }
 
@@ -130,10 +130,10 @@
 
       // Horizon atmospheric glow line
       const horizonGlow = context.createLinearGradient(0, horizon - 20, 0, horizon + 30);
-      horizonGlow.addColorStop(0, "rgba(111, 255, 0, 0)");
-      horizonGlow.addColorStop(0.4, "rgba(0, 240, 255, 0.15)");
-      horizonGlow.addColorStop(0.6, "rgba(111, 255, 0, 0.22)");
-      horizonGlow.addColorStop(1, "rgba(1, 8, 40, 0)");
+      horizonGlow.addColorStop(0, 'rgba(111, 255, 0, 0)');
+      horizonGlow.addColorStop(0.4, 'rgba(0, 240, 255, 0.15)');
+      horizonGlow.addColorStop(0.6, 'rgba(111, 255, 0, 0.22)');
+      horizonGlow.addColorStop(1, 'rgba(1, 8, 40, 0)');
 
       context.fillStyle = horizonGlow;
       context.fillRect(0, horizon - 20, width, 50);
@@ -148,9 +148,9 @@
 
       // Dark translucent glass runway hovering in space
       const runwayGradient = context.createLinearGradient(0, horizon, 0, height);
-      runwayGradient.addColorStop(0, "rgba(1, 8, 40, 0.45)");
-      runwayGradient.addColorStop(0.5, "rgba(2, 14, 52, 0.75)");
-      runwayGradient.addColorStop(1, "rgba(1, 8, 40, 0.92)");
+      runwayGradient.addColorStop(0, 'rgba(1, 8, 40, 0.45)');
+      runwayGradient.addColorStop(0.5, 'rgba(2, 14, 52, 0.75)');
+      runwayGradient.addColorStop(1, 'rgba(1, 8, 40, 0.92)');
 
       context.fillStyle = runwayGradient;
       context.beginPath();
@@ -162,19 +162,33 @@
       context.fill();
 
       // Neon sleepers (moving light energy pulses across the track)
-      drawLuminousSleepers(horizon, trackTopLeft, trackTopRight, trackBottomLeft, trackBottomRight, distance);
+      drawLuminousSleepers(
+        horizon,
+        trackTopLeft,
+        trackTopRight,
+        trackBottomLeft,
+        trackBottomRight,
+        distance,
+      );
 
       // Glowing cosmic rails (outer neon green, inner cyan lane dividers)
       drawNeonRails(horizon, trackTopLeft, trackTopRight, trackBottomLeft, trackBottomRight);
 
       // Glowing runway edge beacons
-      drawRunwayBeacons(horizon, trackTopLeft, trackTopRight, trackBottomLeft, trackBottomRight, distance);
+      drawRunwayBeacons(
+        horizon,
+        trackTopLeft,
+        trackTopRight,
+        trackBottomLeft,
+        trackBottomRight,
+        distance,
+      );
     }
 
     function drawLuminousSleepers(horizon, topLeft, topRight, bottomLeft, bottomRight, distance) {
       const sleeperCount = 20;
       for (let index = 0; index < sleeperCount; index += 1) {
-        const progress = (index / sleeperCount + (distance * 0.016) % 1) % 1;
+        const progress = (index / sleeperCount + ((distance * 0.016) % 1)) % 1;
         const perspective = progress ** 2.2;
         const y = horizon + (height - horizon) * perspective;
         const left = topLeft + (bottomLeft - topLeft) * perspective;
@@ -210,9 +224,9 @@
         context.save();
         if (isOuter) {
           // Outer Neon Green Rails with intense glow
-          context.shadowColor = "#6FFF00";
+          context.shadowColor = '#6FFF00';
           context.shadowBlur = 16;
-          context.strokeStyle = "rgba(111, 255, 0, 0.85)";
+          context.strokeStyle = 'rgba(111, 255, 0, 0.85)';
           context.lineWidth = 3.5;
           context.beginPath();
           context.moveTo(topX, horizon);
@@ -221,7 +235,7 @@
 
           // Core bright white-neon line
           context.shadowBlur = 0;
-          context.strokeStyle = "#EFF4FF";
+          context.strokeStyle = '#EFF4FF';
           context.lineWidth = 1.5;
           context.beginPath();
           context.moveTo(topX, horizon);
@@ -229,9 +243,9 @@
           context.stroke();
         } else {
           // Inner Lane Dividers (Electric Cyan dotted glow)
-          context.shadowColor = "#00F0FF";
+          context.shadowColor = '#00F0FF';
           context.shadowBlur = 8;
-          context.strokeStyle = "rgba(0, 240, 255, 0.55)";
+          context.strokeStyle = 'rgba(0, 240, 255, 0.55)';
           context.lineWidth = 2;
           context.setLineDash([12, 14]);
           context.beginPath();
@@ -253,7 +267,7 @@
         const size = 3 + progress * 10;
 
         context.save();
-        context.shadowColor = "#6FFF00";
+        context.shadowColor = '#6FFF00';
         context.shadowBlur = 6 + progress * 12;
 
         // Left beacon
@@ -292,7 +306,7 @@
         context.translate(x, y);
 
         // Liquid Glass Gate Body
-        context.shadowColor = isSelected ? "#6FFF00" : "#00F0FF";
+        context.shadowColor = isSelected ? '#6FFF00' : '#00F0FF';
         context.shadowBlur = (isSelected ? 32 : 16) * scale;
 
         // Base rounded rect
@@ -301,13 +315,13 @@
         // Glass background with subtle cosmic luminosity
         const glassGradient = context.createLinearGradient(0, -gateHeight / 2, 0, gateHeight / 2);
         if (isSelected) {
-          glassGradient.addColorStop(0, "rgba(111, 255, 0, 0.45)");
-          glassGradient.addColorStop(0.5, "rgba(111, 255, 0, 0.2)");
-          glassGradient.addColorStop(1, "rgba(1, 8, 40, 0.85)");
+          glassGradient.addColorStop(0, 'rgba(111, 255, 0, 0.45)');
+          glassGradient.addColorStop(0.5, 'rgba(111, 255, 0, 0.2)');
+          glassGradient.addColorStop(1, 'rgba(1, 8, 40, 0.85)');
         } else {
-          glassGradient.addColorStop(0, "rgba(255, 255, 255, 0.18)");
-          glassGradient.addColorStop(0.4, "rgba(255, 255, 255, 0.04)");
-          glassGradient.addColorStop(1, "rgba(1, 8, 40, 0.8)");
+          glassGradient.addColorStop(0, 'rgba(255, 255, 255, 0.18)');
+          glassGradient.addColorStop(0.4, 'rgba(255, 255, 255, 0.04)');
+          glassGradient.addColorStop(1, 'rgba(1, 8, 40, 0.8)');
         }
         context.fillStyle = glassGradient;
         context.fill();
@@ -316,15 +330,15 @@
         context.lineWidth = Math.max(1.4, 2.4 * scale);
         const borderGradient = context.createLinearGradient(0, -gateHeight / 2, 0, gateHeight / 2);
         if (isSelected) {
-          borderGradient.addColorStop(0, "#6FFF00");
-          borderGradient.addColorStop(0.5, "rgba(111, 255, 0, 0.4)");
-          borderGradient.addColorStop(1, "#6FFF00");
+          borderGradient.addColorStop(0, '#6FFF00');
+          borderGradient.addColorStop(0.5, 'rgba(111, 255, 0, 0.4)');
+          borderGradient.addColorStop(1, '#6FFF00');
         } else {
-          borderGradient.addColorStop(0, "rgba(255, 255, 255, 0.65)");
-          borderGradient.addColorStop(0.2, "rgba(255, 255, 255, 0.2)");
-          borderGradient.addColorStop(0.5, "rgba(255, 255, 255, 0.05)");
-          borderGradient.addColorStop(0.8, "rgba(0, 240, 255, 0.3)");
-          borderGradient.addColorStop(1, "rgba(255, 255, 255, 0.6)");
+          borderGradient.addColorStop(0, 'rgba(255, 255, 255, 0.65)');
+          borderGradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.2)');
+          borderGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.05)');
+          borderGradient.addColorStop(0.8, 'rgba(0, 240, 255, 0.3)');
+          borderGradient.addColorStop(1, 'rgba(255, 255, 255, 0.6)');
         }
         context.strokeStyle = borderGradient;
         context.stroke();
@@ -337,15 +351,15 @@
           gateHeight - 8 * scale,
           7 * scale,
         );
-        context.fillStyle = isSelected ? "rgba(1, 15, 60, 0.8)" : "rgba(1, 8, 40, 0.65)";
+        context.fillStyle = isSelected ? 'rgba(1, 15, 60, 0.8)' : 'rgba(1, 8, 40, 0.65)';
         context.fill();
 
         // Number Text in Anton font
         context.shadowBlur = isSelected ? 20 * scale : 6 * scale;
-        context.shadowColor = isSelected ? "#6FFF00" : "#00F0FF";
-        context.fillStyle = isSelected ? "#6FFF00" : "#EFF4FF";
-        context.textAlign = "center";
-        context.textBaseline = "middle";
+        context.shadowColor = isSelected ? '#6FFF00' : '#00F0FF';
+        context.fillStyle = isSelected ? '#6FFF00' : '#EFF4FF';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
         context.font = `700 ${Math.max(16, 28 * scale)}px Anton, sans-serif`;
         context.fillText(String(gate.choices[lane].answer), 0, 1 * scale, gateWidth - 12 * scale);
 
@@ -356,17 +370,17 @@
     function drawPortalPillars(x, y, gateWidth, gateHeight, progress, isSelected) {
       context.save();
       const beamHeight = Math.max(10, 42 * progress);
-      const beamGrad = context.createLinearGradient(0, y + gateHeight * 0.4, 0, y + gateHeight * 0.4 + beamHeight);
-      beamGrad.addColorStop(0, isSelected ? "rgba(111, 255, 0, 0.5)" : "rgba(0, 240, 255, 0.35)");
-      beamGrad.addColorStop(1, "rgba(1, 8, 40, 0)");
+      const beamGrad = context.createLinearGradient(
+        0,
+        y + gateHeight * 0.4,
+        0,
+        y + gateHeight * 0.4 + beamHeight,
+      );
+      beamGrad.addColorStop(0, isSelected ? 'rgba(111, 255, 0, 0.5)' : 'rgba(0, 240, 255, 0.35)');
+      beamGrad.addColorStop(1, 'rgba(1, 8, 40, 0)');
 
       context.fillStyle = beamGrad;
-      context.fillRect(
-        x - gateWidth * 0.42,
-        y + gateHeight * 0.4,
-        gateWidth * 0.84,
-        beamHeight,
-      );
+      context.fillRect(x - gateWidth * 0.42, y + gateHeight * 0.4, gateWidth * 0.84, beamHeight);
       context.restore();
     }
 
@@ -385,8 +399,8 @@
       const y = height * 0.81;
       const scale = Math.min(1.6, Math.max(1.15, width / 560));
       const phase = performance.now() * 0.018;
-      const bob = state === "playing" ? Math.abs(Math.sin(phase)) * 5 : 0;
-      const stride = state === "playing" ? Math.sin(phase) * 9 : 0;
+      const bob = state === 'playing' ? Math.abs(Math.sin(phase)) * 5 : 0;
+      const stride = state === 'playing' ? Math.sin(phase) * 9 : 0;
 
       context.save();
       context.translate(x, y);
@@ -395,13 +409,13 @@
 
       // Soft ground shadow with subtle neon reflection
       context.save();
-      context.fillStyle = "rgba(1, 4, 20, 0.65)";
+      context.fillStyle = 'rgba(1, 4, 20, 0.65)';
       context.beginPath();
       context.ellipse(0, 32, 26 - bob * 0.8, 7 - bob * 0.3, 0, 0, Math.PI * 2);
       context.fill();
 
       // Faint neon green ambient ground bounce
-      context.fillStyle = "rgba(111, 255, 0, 0.08)";
+      context.fillStyle = 'rgba(111, 255, 0, 0.08)';
       context.beginPath();
       context.ellipse(0, 32, 32, 9, 0, 0, Math.PI * 2);
       context.fill();
@@ -433,10 +447,10 @@
       const footY = 27 + bob;
 
       // Legs (chubby white spacesuit)
-      context.strokeStyle = "#EFF4FF";
+      context.strokeStyle = '#EFF4FF';
       context.lineWidth = 10;
-      context.lineCap = "round";
-      context.lineJoin = "round";
+      context.lineCap = 'round';
+      context.lineJoin = 'round';
 
       // Left leg
       context.beginPath();
@@ -461,22 +475,22 @@
       context.translate(x, y);
 
       // Boot sole (dark gray tread)
-      context.fillStyle = "#334155";
+      context.fillStyle = '#334155';
       context.beginPath();
       context.roundRect(-6.5, 1, 13, 4.5, 2);
       context.fill();
 
       // Boot upper (chunky white space boot)
       const bootGrad = context.createLinearGradient(0, -5, 0, 2);
-      bootGrad.addColorStop(0, "#FFFFFF");
-      bootGrad.addColorStop(1, "#D0DBE5");
+      bootGrad.addColorStop(0, '#FFFFFF');
+      bootGrad.addColorStop(1, '#D0DBE5');
       context.fillStyle = bootGrad;
       context.beginPath();
       context.roundRect(-6, -5, 12, 7, 3);
       context.fill();
 
       // Boot cuff ring
-      context.strokeStyle = "#94A3B8";
+      context.strokeStyle = '#94A3B8';
       context.lineWidth = 1;
       context.beginPath();
       context.moveTo(-5, -4);
@@ -492,9 +506,9 @@
 
       // Cute pear-shaped chubby white spacesuit torso
       const bodyGrad = context.createRadialGradient(2, bodyY + 12, 4, 0, bodyY + 14, 22);
-      bodyGrad.addColorStop(0, "#FFFFFF");
-      bodyGrad.addColorStop(0.65, "#E2E8F0");
-      bodyGrad.addColorStop(1, "#CBD5E1");
+      bodyGrad.addColorStop(0, '#FFFFFF');
+      bodyGrad.addColorStop(0.65, '#E2E8F0');
+      bodyGrad.addColorStop(1, '#CBD5E1');
 
       context.fillStyle = bodyGrad;
       context.beginPath();
@@ -503,7 +517,7 @@
       context.fill();
 
       // Subtle horizontal waist seam
-      context.strokeStyle = "rgba(148, 163, 184, 0.4)";
+      context.strokeStyle = 'rgba(148, 163, 184, 0.4)';
       context.lineWidth = 1;
       context.beginPath();
       context.moveTo(-13, bodyY + 23);
@@ -521,34 +535,34 @@
       const packH = 22;
 
       // Drop shadow from backpack onto suit
-      context.shadowColor = "rgba(1, 8, 40, 0.4)";
+      context.shadowColor = 'rgba(1, 8, 40, 0.4)';
       context.shadowBlur = 6;
       context.shadowOffsetY = 2;
 
       // Backpack main body (rounded white casing)
       const packGrad = context.createLinearGradient(0, packY, 0, packY + packH);
-      packGrad.addColorStop(0, "#FFFFFF");
-      packGrad.addColorStop(1, "#D8E2EC");
+      packGrad.addColorStop(0, '#FFFFFF');
+      packGrad.addColorStop(1, '#D8E2EC');
       context.fillStyle = packGrad;
       context.beginPath();
       context.roundRect(packX, packY, packW, packH, 5);
       context.fill();
-      context.shadowColor = "transparent";
+      context.shadowColor = 'transparent';
 
       // Backpack subtle rim border
-      context.strokeStyle = "#94A3B8";
+      context.strokeStyle = '#94A3B8';
       context.lineWidth = 1;
       context.stroke();
 
       // 1. TOP-LEFT: Cyan illuminated LCD display panel
-      context.fillStyle = "#031024";
+      context.fillStyle = '#031024';
       context.beginPath();
       context.roundRect(packX + 3.5, packY + 3.5, 7.5, 8.5, 1.5);
       context.fill();
 
       // Glowing cyan level bars inside LCD
-      context.fillStyle = "#00F0FF";
-      context.shadowColor = "#00F0FF";
+      context.fillStyle = '#00F0FF';
+      context.shadowColor = '#00F0FF';
       context.shadowBlur = 4;
       for (let bar = 0; bar < 3; bar += 1) {
         context.fillRect(packX + 4.5, packY + 4.5 + bar * 2.2, 5.5, 1.3);
@@ -556,14 +570,14 @@
       context.shadowBlur = 0;
 
       // 2. TOP-CENTER: Circular knob with Green LED in center
-      context.fillStyle = "#CBD5E1";
+      context.fillStyle = '#CBD5E1';
       context.beginPath();
       context.arc(packX + 15, packY + 6.5, 3.2, 0, Math.PI * 2);
       context.fill();
 
       // Bright neon green LED
-      context.fillStyle = "#6FFF00";
-      context.shadowColor = "#6FFF00";
+      context.fillStyle = '#6FFF00';
+      context.shadowColor = '#6FFF00';
       context.shadowBlur = 6;
       context.beginPath();
       context.arc(packX + 15, packY + 6.5, 1.6, 0, Math.PI * 2);
@@ -571,8 +585,8 @@
       context.shadowBlur = 0;
 
       // 3. TOP-RIGHT: Orange toggle switch / lever
-      context.fillStyle = "#FF9E3B";
-      context.shadowColor = "#FF9E3B";
+      context.fillStyle = '#FF9E3B';
+      context.shadowColor = '#FF9E3B';
       context.shadowBlur = 4;
       context.beginPath();
       context.roundRect(packX + 20, packY + 4, 2, 6, 1);
@@ -580,8 +594,8 @@
       context.shadowBlur = 0;
 
       // 4. BOTTOM-LEFT: Vertical glowing indicator pill
-      context.fillStyle = "#00F0FF";
-      context.shadowColor = "#00F0FF";
+      context.fillStyle = '#00F0FF';
+      context.shadowColor = '#00F0FF';
       context.shadowBlur = 4;
       context.beginPath();
       context.roundRect(packX + 4.5, packY + 14, 2.5, 5, 1);
@@ -590,16 +604,16 @@
 
       // 5. BOTTOM-RIGHT: Dual Status LEDs (Amber + Neon Green)
       // Amber LED
-      context.fillStyle = "#FFB84D";
-      context.shadowColor = "#FFB84D";
+      context.fillStyle = '#FFB84D';
+      context.shadowColor = '#FFB84D';
       context.shadowBlur = 4;
       context.beginPath();
       context.arc(packX + 14, packY + 16.5, 1.8, 0, Math.PI * 2);
       context.fill();
 
       // Green LED
-      context.fillStyle = "#6FFF00";
-      context.shadowColor = "#6FFF00";
+      context.fillStyle = '#6FFF00';
+      context.shadowColor = '#6FFF00';
       context.shadowBlur = 5;
       context.beginPath();
       context.arc(packX + 19, packY + 16.5, 1.8, 0, Math.PI * 2);
@@ -607,7 +621,7 @@
       context.shadowBlur = 0;
 
       // Thruster exhaust at bottom of backpack (tiny cyan plasma glow when running)
-      if (state === "playing") {
+      if (state === 'playing') {
         const exhaustPulse = Math.sin(performance.now() * 0.03) * 0.3 + 0.7;
         context.fillStyle = `rgba(0, 240, 255, ${0.45 * exhaustPulse})`;
         context.beginPath();
@@ -624,9 +638,9 @@
       const armY = -10 + bob;
 
       // Arm strokes (swinging counter to leg stride)
-      context.strokeStyle = "#EFF4FF";
+      context.strokeStyle = '#EFF4FF';
       context.lineWidth = 7.5;
-      context.lineCap = "round";
+      context.lineCap = 'round';
 
       // Left arm & mitten hand
       context.beginPath();
@@ -641,7 +655,7 @@
       context.stroke();
 
       // Left mitten cuff & hand
-      context.fillStyle = "#CBD5E1";
+      context.fillStyle = '#CBD5E1';
       context.beginPath();
       context.arc(-20 - stride * 0.45, armY + 14 - stride * 0.2, 4.2, 0, Math.PI * 2);
       context.fill();
@@ -659,7 +673,7 @@
       const helmetY = -27 + bob;
 
       // Collar neck ring connecting helmet to suit
-      context.fillStyle = "#CBD5E1";
+      context.fillStyle = '#CBD5E1';
       context.beginPath();
       context.roundRect(-10, helmetY + 11, 20, 5, 2.5);
       context.fill();
@@ -667,9 +681,9 @@
       // Left & Right cylindrical ear communication pods
       // Left ear pod
       const earGradLeft = context.createLinearGradient(-19, helmetY, -15, helmetY);
-      earGradLeft.addColorStop(0, "#94A3B8");
-      earGradLeft.addColorStop(0.5, "#EFF4FF");
-      earGradLeft.addColorStop(1, "#CBD5E1");
+      earGradLeft.addColorStop(0, '#94A3B8');
+      earGradLeft.addColorStop(0.5, '#EFF4FF');
+      earGradLeft.addColorStop(1, '#CBD5E1');
       context.fillStyle = earGradLeft;
       context.beginPath();
       context.roundRect(-18.5, helmetY - 4, 4.5, 9, 2);
@@ -677,33 +691,33 @@
 
       // Right ear pod
       const earGradRight = context.createLinearGradient(15, helmetY, 19, helmetY);
-      earGradRight.addColorStop(0, "#CBD5E1");
-      earGradRight.addColorStop(0.5, "#EFF4FF");
-      earGradRight.addColorStop(1, "#94A3B8");
+      earGradRight.addColorStop(0, '#CBD5E1');
+      earGradRight.addColorStop(0.5, '#EFF4FF');
+      earGradRight.addColorStop(1, '#94A3B8');
       context.fillStyle = earGradRight;
       context.beginPath();
       context.roundRect(14, helmetY - 4, 4.5, 9, 2);
       context.fill();
 
       // Right mini communicator antenna
-      context.strokeStyle = "#94A3B8";
+      context.strokeStyle = '#94A3B8';
       context.lineWidth = 1.4;
       context.beginPath();
       context.moveTo(17, helmetY - 4);
       context.lineTo(20, helmetY - 11);
       context.stroke();
       // Antenna tip
-      context.fillStyle = "#FFB84D";
+      context.fillStyle = '#FFB84D';
       context.beginPath();
       context.arc(20, helmetY - 11, 1.8, 0, Math.PI * 2);
       context.fill();
 
       // Spherical white helmet dome
       const domeGrad = context.createRadialGradient(4, helmetY - 4, 3, 0, helmetY, 17);
-      domeGrad.addColorStop(0, "#FFFFFF");
-      domeGrad.addColorStop(0.55, "#F1F5F9");
-      domeGrad.addColorStop(0.85, "#CBD5E1");
-      domeGrad.addColorStop(1, "#94A3B8");
+      domeGrad.addColorStop(0, '#FFFFFF');
+      domeGrad.addColorStop(0.55, '#F1F5F9');
+      domeGrad.addColorStop(0.85, '#CBD5E1');
+      domeGrad.addColorStop(1, '#94A3B8');
 
       context.fillStyle = domeGrad;
       context.beginPath();
@@ -711,15 +725,15 @@
       context.fill();
 
       // Glossy specular highlight arc on helmet top-right
-      context.strokeStyle = "rgba(255, 255, 255, 0.85)";
+      context.strokeStyle = 'rgba(255, 255, 255, 0.85)';
       context.lineWidth = 2.2;
-      context.lineCap = "round";
+      context.lineCap = 'round';
       context.beginPath();
       context.arc(0, helmetY, 12, -Math.PI * 0.42, -Math.PI * 0.12);
       context.stroke();
 
       // Visor rim seam line
-      context.strokeStyle = "rgba(148, 163, 184, 0.45)";
+      context.strokeStyle = 'rgba(148, 163, 184, 0.45)';
       context.lineWidth = 1;
       context.beginPath();
       context.arc(0, helmetY, 14.5, 0, Math.PI * 2);
@@ -742,7 +756,8 @@
 
         if (particle.isRing) {
           // Expanding energy wave ring
-          const currentRadius = particle.radius + (particle.maxRadius - particle.radius) * (1 - alpha);
+          const currentRadius =
+            particle.radius + (particle.maxRadius - particle.radius) * (1 - alpha);
           context.save();
           context.strokeStyle = particle.color;
           context.lineWidth = 2.5 * alpha;

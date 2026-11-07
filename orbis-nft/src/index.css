@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #010828;
-  color: #EFF4FF;
+  color: #eff4ff;
   overflow-x: hidden;
 }
 
@@ -37,7 +37,9 @@ body {
     rgba(255, 255, 255, 0.15) 80%,
     rgba(255, 255, 255, 0.45) 100%
   );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;

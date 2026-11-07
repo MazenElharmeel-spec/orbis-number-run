@@ -1,9 +1,9 @@
-import { Mail, Twitter, Github } from 'lucide-react'
+import { Mail, Twitter, Github } from 'lucide-react';
 
-const NAV_LINKS = ['Homepage', 'Gallery', 'Buy NFT', 'FAQ', 'Contact']
+const NAV_LINKS = ['Homepage', 'Gallery', 'Buy NFT', 'FAQ', 'Contact'];
 
 const HERO_VIDEO =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_045634_e1c98c76-1265-4f5c-882a-4276f2080894.mp4'
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_045634_e1c98c76-1265-4f5c-882a-4276f2080894.mp4';
 
 function SocialButtons({ className = '' }: { className?: string }) {
   return (
@@ -17,7 +17,7 @@ function SocialButtons({ className = '' }: { className?: string }) {
         </button>
       ))}
     </div>
-  )
+  );
 }
 
 export default function Hero() {
@@ -85,5 +85,5 @@ export default function Hero() {
         <SocialButtons className="hidden lg:flex flex-col gap-3 fixed top-1/2 -translate-y-1/2 right-6 xl:right-10 z-20" />
       </div>
     </section>
-  )
+  );
 }

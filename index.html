@@ -1,21 +1,21 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-    >
-    <meta name="theme-color" content="#010828">
+    />
+    <meta name="theme-color" content="#010828" />
     <title>Orbis.Nft — Number Run</title>
     <!-- Google Fonts: Anton for headings & navigation, Condiment for cursive accents -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Anton&family=Condiment&display=swap"
       rel="stylesheet"
-    >
-    <link rel="stylesheet" href="styles.css">
+    />
+    <link rel="stylesheet" href="styles.css" />
     <script defer src="src/random.js"></script>
     <script defer src="src/equations.js"></script>
     <script defer src="src/renderer.js"></script>
@@ -50,9 +50,7 @@
             <span class="brand-sub font-condiment">Space Runner</span>
             <span class="brand-title font-grotesk">ORBIS.NFT</span>
           </div>
-          <div class="brand-badge">
-            <span class="badge-dot"></span> LIVE
-          </div>
+          <div class="brand-badge"><span class="badge-dot"></span> LIVE</div>
         </div>
 
         <div class="stats liquid-glass">
@@ -100,7 +98,7 @@
       <section class="card liquid-glass">
         <!-- Pilot Status Card -->
         <div class="pilot-badge">
-          <img src="orbis-pilot.png" alt="Orbis Astronaut" class="pilot-avatar">
+          <img src="orbis-pilot.png" alt="Orbis Astronaut" class="pilot-avatar" />
           <div class="pilot-details">
             <span class="pilot-role font-condiment">Astronaut Pilot</span>
             <span class="pilot-name font-grotesk">ORBIS</span>
@@ -110,29 +108,49 @@
 
         <div class="eyebrow" id="eyebrow">Beyond Earth & Space Boundaries</div>
         <h1 id="title" class="font-grotesk">
-          RUN THE<br>
+          RUN THE<br />
           <span class="font-condiment title-accent">Numbers.</span>
         </h1>
         <p id="copy" class="font-mono">
-          Navigate Orbis through the deep cosmos. Solve the centered equation,
-          then guide Orbis into the gate holding the true answer.
+          Navigate Orbis through the deep cosmos. Solve the centered equation, then guide Orbis into
+          the gate holding the true answer.
         </p>
 
         <div class="pace-title font-grotesk">SELECT WARP PACE</div>
         <div class="pace-picker" role="group" aria-label="Pace selection">
-          <button class="pace-option liquid-glass" type="button" data-seconds="3" aria-pressed="false">
+          <button
+            class="pace-option liquid-glass"
+            type="button"
+            data-seconds="3"
+            aria-pressed="false"
+          >
             <strong>3s</strong>
             <span>SUPER</span>
           </button>
-          <button class="pace-option liquid-glass" type="button" data-seconds="5" aria-pressed="false">
+          <button
+            class="pace-option liquid-glass"
+            type="button"
+            data-seconds="5"
+            aria-pressed="false"
+          >
             <strong>5s</strong>
             <span>HARD</span>
           </button>
-          <button class="pace-option liquid-glass active" type="button" data-seconds="7" aria-pressed="true">
+          <button
+            class="pace-option liquid-glass active"
+            type="button"
+            data-seconds="7"
+            aria-pressed="true"
+          >
             <strong>7s</strong>
             <span>NORMAL</span>
           </button>
-          <button class="pace-option liquid-glass" type="button" data-seconds="10" aria-pressed="false">
+          <button
+            class="pace-option liquid-glass"
+            type="button"
+            data-seconds="10"
+            aria-pressed="false"
+          >
             <strong>10s</strong>
             <span>EASY</span>
           </button>
@@ -147,7 +165,7 @@
         </div>
 
         <div class="result font-mono" id="result" hidden></div>
-        
+
         <button class="play font-grotesk" id="play" type="button">
           START MISSION <span aria-hidden="true">↗</span>
         </button>

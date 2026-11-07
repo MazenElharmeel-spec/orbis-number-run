@@ -9,5 +9,5 @@ export default function TextureOverlay() {
         opacity: 0.6,
       }}
     />
-  )
+  );
 }

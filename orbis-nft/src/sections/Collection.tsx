@@ -14,7 +14,7 @@ const NFT_CARDS = [
       'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_055427_ac7035b5-9f3b-4289-86fc-941b2432317d.mp4',
     score: '8.2/10',
   },
-]
+];
 
 function ChevronRight() {
   return (
@@ -30,7 +30,7 @@ function ChevronRight() {
     >
       <polyline points="9 18 15 12 9 6" />
     </svg>
-  )
+  );
 }
 
 function NftCard({ video, score }: { video: string; score: string }) {
@@ -65,7 +65,7 @@ function NftCard({ video, score }: { video: string; score: string }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default function Collection() {
@@ -79,8 +79,7 @@ export default function Collection() {
             Collection of
             <br />
             <span className="ml-12 sm:ml-16 md:ml-24 lg:ml-32 inline-block">
-              <span className="font-condiment text-neon normal-case">Space</span>{' '}
-              objects
+              <span className="font-condiment text-neon normal-case">Space</span> objects
             </span>
           </h2>
 
@@ -111,5 +110,5 @@ export default function Collection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

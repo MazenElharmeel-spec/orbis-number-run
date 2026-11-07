@@ -1,20 +1,13 @@
-import { Mail, Twitter, Github } from 'lucide-react'
+import { Mail, Twitter, Github } from 'lucide-react';
 
 const CTA_VIDEO =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_055729_72d66327-b59e-4ae9-bb70-de6ccb5ecdb0.mp4'
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_055729_72d66327-b59e-4ae9-bb70-de6ccb5ecdb0.mp4';
 
 export default function Cta() {
   return (
     <section className="relative w-full overflow-hidden">
       {/* Background video - native aspect ratio */}
-      <video
-        src={CTA_VIDEO}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-full h-auto block"
-      />
+      <video src={CTA_VIDEO} autoPlay loop muted playsInline className="w-full h-auto block" />
 
       {/* Text content overlay */}
       <div className="absolute inset-0 flex items-center justify-end z-10">
@@ -59,5 +52,5 @@ export default function Cta() {
         </div>
       </div>
     </section>
-  )
+  );
 }
